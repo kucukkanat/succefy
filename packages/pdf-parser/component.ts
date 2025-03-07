@@ -3,20 +3,14 @@ import { property } from "lit/decorators.js";
 import { parse, ParsedPDF } from "@succefy/pdf-parser/parser";
 
 export class Component extends LitElement {
-  static get properties() {
-    return {
-      label: { type: String },
-      multiple: { type: Boolean },
-      hostUrl: { type: String },
-    };
-  }
+  @property({ type: String })
+  label = "Upload your CV";
 
-  constructor() {
-    super();
-    this.label = "Upload your CV";
-    this.multiple = false;
-    this.hostUrl = "";
-  }
+  @property({ type: Boolean })
+  multiple = false;
+
+  @property({ type: String })
+  hostUrl = "";
 
   render() {
     return html`
