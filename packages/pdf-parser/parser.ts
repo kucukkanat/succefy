@@ -1,5 +1,5 @@
 import * as pdfjsLib from "pdfjs-dist";
-import _Worker_ from "pdfjs-dist/build/pdf.worker.mjs?worker";
+import _Worker_ from "pdfjs-dist/build/pdf.worker.mjs?worker&inline";
 import { TextItem } from "pdfjs-dist/types/src/display/api";
 pdfjsLib.GlobalWorkerOptions.workerPort = new _Worker_();
 export type ParsedPDF = {
