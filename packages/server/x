@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+if [ "$1" = "build" ]; then
+    docker build -t succefy-cv-server .
+elif [ "$1" = "run" ]; then
+    docker run --rm -it -p 8000:8001 -e PORT=8001 -e OPENAI_API_KEY="" succefy-cv-server
+else
+    echo "Usage: $0 {build|run}"
+    exit 1
+fi

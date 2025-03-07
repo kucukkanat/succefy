@@ -4,6 +4,7 @@ import { createOpenAI } from "npm:@ai-sdk/openai";
 import { generateObject } from "npm:ai";
 import { CandidateCVSchema } from "./cv.schema.ts";
 
+const PORT = Deno.env.get("PORT") ?? "8000";
 const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
 if (!OPENAI_API_KEY) {
   console.warn(
@@ -37,10 +38,13 @@ export async function CVTextToJSON(content: string) {
 
 const app = new Hono();
 app.use(cors());
+app.get("/health", (c) => {
+  return c.json({ status: "UP" }, 200);
+});
 app.post("/", async (c) => {
   const { content } = c.body;
   const cv_json = await CVTextToJSON(content);
   return c.json(cv_json, 200);
 });
 
-Deno.serve(app.fetch);
+Deno.serve({ port: Number(PORT) }, app.fetch);
